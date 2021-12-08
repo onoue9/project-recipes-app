@@ -1,13 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 import Input from './Input';
+import Button from './Button';
+import UserContext from '../context/UserContext';
 
 export default function Header({ title, disabled = false }) {
   const [enableInput, setEnableInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [checkedRadio, setCheckedRadio] = useState('');
+  const { setSearchInput } = useContext(UserContext);
   const history = useHistory();
 
   const handleProfileClick = () => {
@@ -20,6 +24,14 @@ export default function Header({ title, disabled = false }) {
 
   const handleChangeSearch = ({ target }) => {
     setInputValue(target.value);
+  };
+
+  const handleChecked = ({ target }) => {
+    setCheckedRadio(target.value);
+  };
+
+  const handleSearchBtn = () => {
+    setSearchInput({ value: inputValue, filter: checkedRadio });
   };
 
   return (
@@ -44,13 +56,47 @@ export default function Header({ title, disabled = false }) {
           </button>
           { enableInput
           && (
-            <Input
-              testid="search-input"
-              type="text"
-              placeholder="Buscar"
-              onChange={ handleChangeSearch }
-              value={ inputValue }
-            />
+            <div>
+              <Input
+                testid="search-input"
+                type="text"
+                placeholder="Buscar"
+                onChange={ handleChangeSearch }
+                value={ inputValue }
+              />
+              <div>
+                <Input
+                  testid="ingredient-search-radio"
+                  type="radio"
+                  labelText="Ingrediente"
+                  value="filter.php?i="
+                  name="SearchOption"
+                  onChange={ handleChecked }
+                />
+                <Input
+                  testid="name-search-radio"
+                  type="radio"
+                  labelText="Nome"
+                  value="search.php?s="
+                  name="SearchOption"
+                  onChange={ handleChecked }
+                />
+                <Input
+                  testid="first-letter-search-radio"
+                  type="radio"
+                  labelText="Primeira letra"
+                  value="search.php?f="
+                  name="SearchOption"
+                  onChange={ handleChecked }
+                />
+                <Button
+                  testid="exec-search-btn"
+                  labelText="Buscar"
+                  onClick={ handleSearchBtn }
+                />
+              </div>
+            </div>
+
           )}
         </div>
       )}
