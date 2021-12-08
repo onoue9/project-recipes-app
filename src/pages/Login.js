@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
@@ -6,6 +7,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
+  const history = useHistory();
 
   const verifyInput = () => {
     const emailValidation = /\S+@\S+.com/;
@@ -28,6 +30,14 @@ function Login() {
     verifyInput();
   };
 
+  const handleClick = () => {
+    const objStorage = { email };
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+    localStorage.setItem('user', JSON.stringify(objStorage));
+    history.push('/comidas');
+  };
+
   return (
     <div>
       <Input
@@ -46,6 +56,7 @@ function Login() {
         testid="login-submit-btn"
         labelText="Entrar"
         disabled={ btnIsDisabled }
+        onClick={ handleClick }
       />
     </div>
   );
