@@ -45,12 +45,14 @@ function Login() {
         placeholder="E-mail"
         type="text"
         onChange={ handleChangeEmail }
+        value={ email }
       />
       <Input
         testid="password-input"
         placeholder="Senha"
         type="password"
         onChange={ handleChangePassword }
+        value={ password }
       />
       <Button
         testid="login-submit-btn"
