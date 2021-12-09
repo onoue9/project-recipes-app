@@ -5,7 +5,7 @@ import Context from '../context/Context';
 
 function UserProvider({ children }) {
   const [apiResult, setApiResult] = useState([]);
-  const [mealOrDrink, setMealOrDrink] = useState('');
+  const [mealOrDrink, setMealOrDrink] = useState('themealdb');
   const history = useHistory();
 
   const recipesDetail = (recipes, id) => {
@@ -15,14 +15,15 @@ function UserProvider({ children }) {
     }
   };
 
-  async function fetchAPI(filter, value) {
-    const response = await fetch(`https://www.${mealOrDrink}.com/api/json/v1/1/${filter}${value}`);
+  async function fetchAPI(filter, adressParameter = 'themealdb', value = '') {
+    const response = await fetch(`https://www.${adressParameter}.com/api/json/v1/1/${filter}${value}`);
     const result = await response.json();
-    if (result.meals && mealOrDrink === 'themealdb') {
+    console.log('fetch');
+    if (result.meals && adressParameter === 'themealdb') {
       const mealsList = result.meals;
       setApiResult(mealsList);
       recipesDetail(mealsList, mealsList[0].idMeal);
-    } else if (result.drinks && mealOrDrink === 'thecocktaildb') {
+    } else if (result.drinks && adressParameter === 'thecocktaildb') {
       const drinksList = result.drinks;
       setApiResult(drinksList);
       recipesDetail(drinksList, drinksList[0].idDrink);
@@ -36,6 +37,7 @@ function UserProvider({ children }) {
     setApiResult,
     fetchAPI,
     setMealOrDrink,
+    mealOrDrink,
   };
 
   return (

@@ -3,6 +3,7 @@ import Context from '../context/Context';
 
 export default function MealsCart() {
   const { apiResult } = useContext(Context);
+
   const listLimit = 11;
   return (
     <div>

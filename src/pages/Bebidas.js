@@ -5,12 +5,14 @@ import Header from '../components/Header';
 import Context from '../context/Context';
 
 export default function Bebidas() {
-  const { setMealOrDrink } = useContext(Context);
+  const { setMealOrDrink, fetchAPI } = useContext(Context);
+  const drink = 'thecocktaildb';
+  const filter = 'search.php?s=';
 
   useEffect(() => {
-    const drink = 'thecocktaildb';
     setMealOrDrink(drink);
-  }, [setMealOrDrink]);
+    fetchAPI(filter, drink);
+  }, []);
 
   return (
     <div>

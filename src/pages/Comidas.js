@@ -5,12 +5,14 @@ import MealsCart from '../components/MealsCart';
 import Context from '../context/Context';
 
 export default function Comidas() {
-  const { setMealOrDrink } = useContext(Context);
+  const { setMealOrDrink, fetchAPI } = useContext(Context);
+  const meal = 'themealdb';
+  const filter = 'search.php?s=';
 
   useEffect(() => {
-    const meal = 'themealdb';
     setMealOrDrink(meal);
-  }, [setMealOrDrink]);
+    fetchAPI(filter, meal);
+  }, []);
 
   return (
     <div>
