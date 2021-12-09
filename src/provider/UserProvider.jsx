@@ -1,12 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import UserContext from '../context/UserContext';
+import { useHistory } from 'react-router';
+import Context from '../context/Context';
 
 function UserProvider({ children }) {
+  const [apiResult, setApiResult] = useState([]);
+  const [mealOrDrink, setMealOrDrink] = useState('');
+  const history = useHistory();
+
+  const recipesDetail = (recipes, id) => {
+    const { location: { pathname } } = history;
+    if (recipes.length === 1) {
+      history.push(`${pathname}/${id}`);
+    }
+  };
+
+  async function fetchAPI(filter, value) {
+    const response = await fetch(`https://www.${mealOrDrink}.com/api/json/v1/1/${filter}${value}`);
+    const result = await response.json();
+    if (result.meals && mealOrDrink === 'themealdb') {
+      const mealsList = result.meals;
+      setApiResult(mealsList);
+      recipesDetail(mealsList, mealsList[0].idMeal);
+    } else if (result.drinks && mealOrDrink === 'thecocktaildb') {
+      const drinksList = result.drinks;
+      setApiResult(drinksList);
+      recipesDetail(drinksList, drinksList[0].idDrink);
+    } else {
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+  }
+
+  const ContextObj = {
+    apiResult,
+    setApiResult,
+    fetchAPI,
+    setMealOrDrink,
+  };
+
   return (
-    <UserContext.Provider value={ [] }>
+    <Context.Provider value={ ContextObj }>
       {children}
-    </UserContext.Provider>
+    </Context.Provider>
   );
 }
 

@@ -14,6 +14,8 @@ import ExpComidaLocal from './pages/ExpComidaLocal';
 import Perfil from './pages/Perfil';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import ReceitasFav from './pages/ReceitasFav';
+import ReceitaComida from './pages/ReceitaComida';
+import ReceitaBebida from './pages/ReceitaBebida';
 
 function App() {
   return (
@@ -21,12 +23,26 @@ function App() {
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas" component={ Comidas } />
       <Route exact path="/bebidas" component={ Bebidas } />
-      {/* <Route exact path="/comidas/:id" render={ (props) => <xxxx { ...props } /> } />
-      <Route exact path="/bebidas/:id" render={ (props) => <xxxx { ...props } /> } />
-      <Route exact path="/comidas/:id/in-progress"
-        render={ (props) => <xx { ...props } /> } />
-      <Route exact path="/bebidas/:id/in-progress"
-        render={ (props) => <xx { ...props } /> } /> */}
+      <Route
+        exact
+        path="/comidas/:id"
+        render={ (props) => <ReceitaComida { ...props } /> }
+      />
+      <Route
+        exact
+        path="/bebidas/:id"
+        render={ (props) => <ReceitaBebida { ...props } /> }
+      />
+      <Route
+        exact
+        path="/comidas/:id/in-progress"
+        render={ (props) => <xx { ...props } /> }
+      />
+      <Route
+        exact
+        path="/bebidas/:id/in-progress"
+        render={ (props) => <xx { ...props } /> }
+      />
       <Route exact path="/explorar" component={ Explorar } />
       <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
       <Route exact path="/explorar/bebidas" component={ ExplorarBebidas } />
