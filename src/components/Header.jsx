@@ -5,13 +5,13 @@ import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 import Input from './Input';
 import Button from './Button';
-import UserContext from '../context/UserContext';
+import Context from '../context/Context';
 
 export default function Header({ title, disabled = false }) {
   const [enableInput, setEnableInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [checkedRadio, setCheckedRadio] = useState('');
-  const { setSearchInput } = useContext(UserContext);
+  const { fetchAPI } = useContext(Context);
   const history = useHistory();
 
   const handleProfileClick = () => {
@@ -31,7 +31,11 @@ export default function Header({ title, disabled = false }) {
   };
 
   const handleSearchBtn = () => {
-    setSearchInput({ value: inputValue, filter: checkedRadio });
+    if (checkedRadio === 'search.php?f=' && inputValue.length > 1) {
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
+    } else {
+      fetchAPI(checkedRadio, inputValue);
+    }
   };
 
   return (
