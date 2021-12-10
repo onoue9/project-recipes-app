@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 
 export default function MealsCart() {
@@ -10,14 +11,16 @@ export default function MealsCart() {
         && (apiResult.map((meal, index) => (
           index <= listLimit
               && (
-                <div data-testid={ `${index}-recipe-card` } key={ meal.idMeal }>
-                  <img
-                    src={ meal.strMealThumb }
-                    alt={ meal.strMeal }
-                    data-testid={ `${index}-card-img` }
-                  />
-                  <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
-                </div>
+                <Link to={ `/comidas/${meal.idMeal}` }>
+                  <div data-testid={ `${index}-recipe-card` } key={ meal.idMeal }>
+                    <img
+                      src={ meal.strMealThumb }
+                      alt={ meal.strMeal }
+                      data-testid={ `${index}-card-img` }
+                    />
+                    <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
+                  </div>
+                </Link>
               )
         ))
         )}

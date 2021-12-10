@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Context from '../context/Context';
 import Button from './Button';
 
@@ -6,11 +6,24 @@ export default function CategoryFilter() {
   const { apiCategoryResult, setCategorySelected,
     mealOrDrink, fetchAPI } = useContext(Context);
   const listLimit = 5;
-  const filterParameter = 'filter.php?c=';
+  const [toggle, setToggle] = useState('');
 
   const handleCategoryButton = ({ target }) => {
-    setCategorySelected(target.innerHTML);
-    fetchAPI(filterParameter, mealOrDrink, target.innerHTML);
+    let filterParameter = 'filter.php?c=';
+    const htmlText = target.innerHTML;
+    if (toggle !== htmlText) {
+      setCategorySelected(htmlText);
+      fetchAPI(filterParameter, mealOrDrink, htmlText);
+    } else {
+      filterParameter = 'search.php?s=';
+      fetchAPI(filterParameter, mealOrDrink);
+    }
+    setToggle(htmlText);
+  };
+
+  const handleButtonAll = () => {
+    const filterParameter = 'search.php?s=';
+    fetchAPI(filterParameter, mealOrDrink);
   };
 
   return (
@@ -27,6 +40,11 @@ export default function CategoryFilter() {
             />
           )
         )) }
+      <Button
+        labelText="All"
+        onClick={ handleButtonAll }
+        testid="All-category-filter"
+      />
     </div>
   );
 }
