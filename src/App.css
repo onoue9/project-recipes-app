@@ -72,3 +72,9 @@ footer {
   position: fixed;
   width: 100%;
 }
+
+.buttonFixed {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}

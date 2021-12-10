@@ -21,7 +21,6 @@ function UserProvider({ children }) {
   async function fetchAPI(filter, adressParameter = 'themealdb', value = '') {
     const response = await fetch(`https://www.${adressParameter}.com/api/json/v1/1/${filter}${value}`);
     const result = await response.json();
-    console.log('fetch');
     if (result.meals && adressParameter === 'themealdb') {
       const mealsList = result.meals;
       setApiResult(mealsList);
@@ -47,8 +46,6 @@ function UserProvider({ children }) {
       setApiCategoryResult(drinksList);
     }
   }
-
-  console.log(apiCategoryResult);
 
   const ContextObj = {
     apiResult,
