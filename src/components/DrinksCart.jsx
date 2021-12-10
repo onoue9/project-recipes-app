@@ -6,7 +6,7 @@ export default function DrinksCart() {
   const listLimit = 11;
   return (
     <div>
-      { apiResult.length > 1
+      { apiResult.length >= 1
         && (apiResult.map((drink, index) => (
           index <= listLimit
               && (

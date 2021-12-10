@@ -1,17 +1,25 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+// import Context from '../context/Context';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
 export default function Footer() {
+  // const { fetchAPI } = useContext(Context);
   const history = useHistory();
 
   const handleDrinkClick = () => {
+    // const filter = 'search.php?s=';
+    // const adressDrink = 'thecocktaildb';
+    // fetchAPI(filter, adressDrink);
     history.push('/bebidas');
   };
 
   const handleMealClick = () => {
+    // const filter = 'search.php?s=';
+    // const adressMeal = 'themealdb';
+    // fetchAPI(filter, adressMeal);
     history.push('/comidas');
   };
 

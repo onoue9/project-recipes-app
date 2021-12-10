@@ -3,18 +3,27 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MealsCart from '../components/MealsCart';
 import Context from '../context/Context';
+import CategoryFilter from '../components/CategoryFilter';
 
 export default function Comidas() {
-  const { setMealOrDrink } = useContext(Context);
+  const { setMealOrDrink, fetchAPI,
+    fetchCategoryAPI, setCategorySelected,
+  } = useContext(Context);
+  const meal = 'themealdb';
+  const filter = 'search.php?s=';
 
   useEffect(() => {
-    const meal = 'themealdb';
     setMealOrDrink(meal);
-  }, [setMealOrDrink]);
+    fetchAPI(filter, meal);
+    fetchCategoryAPI(meal);
+    setCategorySelected('');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
       <Header title="Comidas" />
+      <CategoryFilter />
       <MealsCart />
       <Footer />
     </div>

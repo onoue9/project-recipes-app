@@ -11,7 +11,7 @@ export default function Header({ title, disabled = false }) {
   const [enableInput, setEnableInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [checkedRadio, setCheckedRadio] = useState('');
-  const { fetchAPI } = useContext(Context);
+  const { fetchAPI, mealOrDrink } = useContext(Context);
   const history = useHistory();
 
   const handleProfileClick = () => {
@@ -34,7 +34,7 @@ export default function Header({ title, disabled = false }) {
     if (checkedRadio === 'search.php?f=' && inputValue.length > 1) {
       global.alert('Sua busca deve conter somente 1 (um) caracter');
     } else {
-      fetchAPI(checkedRadio, inputValue);
+      fetchAPI(checkedRadio, mealOrDrink, inputValue);
     }
   };
 
