@@ -6,11 +6,14 @@ import Context from '../context/Context';
 function UserProvider({ children }) {
   const [apiResult, setApiResult] = useState([]);
   const [mealOrDrink, setMealOrDrink] = useState('themealdb');
+  const [apiCategoryResult, setApiCategoryResult] = useState([]);
+  const [categorySelected, setCategorySelected] = useState('');
   const history = useHistory();
 
-  const recipesDetail = (recipes, id) => {
+  const recipesDetail = (recipes, id, filter) => {
     const { location: { pathname } } = history;
-    if (recipes.length === 1) {
+    const filterParameter = 'filter.php?c=';
+    if (recipes.length === 1 && filter !== filterParameter) {
       history.push(`${pathname}/${id}`);
     }
   };
@@ -22,15 +25,30 @@ function UserProvider({ children }) {
     if (result.meals && adressParameter === 'themealdb') {
       const mealsList = result.meals;
       setApiResult(mealsList);
-      recipesDetail(mealsList, mealsList[0].idMeal);
+      recipesDetail(mealsList, mealsList[0].idMeal, filter);
     } else if (result.drinks && adressParameter === 'thecocktaildb') {
       const drinksList = result.drinks;
       setApiResult(drinksList);
-      recipesDetail(drinksList, drinksList[0].idDrink);
+      recipesDetail(drinksList, drinksList[0].idDrink, filter);
     } else {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   }
+
+  async function fetchCategoryAPI(adressParameter = 'themealdb') {
+    const response = await fetch(`https://www.${adressParameter}.com/api/json/v1/1/list.php?c=list`);
+    const result = await response.json();
+    if (result.meals && adressParameter === 'themealdb') {
+      const mealsList = result.meals;
+      setApiCategoryResult(mealsList);
+    }
+    if (result.drinks && adressParameter === 'thecocktaildb') {
+      const drinksList = result.drinks;
+      setApiCategoryResult(drinksList);
+    }
+  }
+
+  console.log(apiCategoryResult);
 
   const ContextObj = {
     apiResult,
@@ -38,6 +56,11 @@ function UserProvider({ children }) {
     fetchAPI,
     setMealOrDrink,
     mealOrDrink,
+    apiCategoryResult,
+    setApiCategoryResult,
+    fetchCategoryAPI,
+    categorySelected,
+    setCategorySelected,
   };
 
   return (
