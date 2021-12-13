@@ -67,6 +67,10 @@
   }
 }
 
+body {
+  max-width: 360px;
+}
+
 footer {
   bottom: 0;
   position: fixed;
@@ -77,4 +81,15 @@ footer {
   bottom: 0;
   position: fixed;
   width: 100%;
+}
+
+.recomendedList {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  width: 360px;
+}
+
+.recomendedCart {
+  width: 180px;
 }

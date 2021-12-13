@@ -1,17 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
-import favoriteIcon from '../images/whiteHeartIcon.svg';
+import unfavoriteIcon from '../images/whiteHeartIcon.svg';
+import favoriteIcon from '../images/blackHeartIcon.svg';
 import Button from '../components/Button';
+import ImageButton from '../components/ImageButton';
+import ListaIngredientes from '../components/ListaIngredientes';
+import Recomendacao from '../components/Recomendacao';
 
 export default function ReceitaComida(props) {
   const { match: { params: { id } } } = props;
+  const history = useHistory();
   const [meal, setMeal] = useState({});
   const [recomendation, setRecomendation] = useState([]);
+  const [recipeIsFavorite, setRecipeIsFavorite] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+
+  const checkRecipeFavorite = (idMeal) => {
+    const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (!favorite) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    } else {
+      setRecipeIsFavorite(favorite
+        .some((recipe) => Number(recipe.id) === Number(idMeal)));
+    }
+  };
+
   const fetchRecipe = async () => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const result = await response.json();
     setMeal(result.meals[0]);
+    checkRecipeFavorite(result.meals[0].idMeal);
   };
 
   const fetchRecomendation = async () => {
@@ -26,18 +47,35 @@ export default function ReceitaComida(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const renderIngredients = () => {
-    const ingredients = Object.entries(meal).filter((element) => (
-      element[0].includes('strIngredient') && element[1]));
-    const measures = Object.entries(meal).filter((element) => (
-      element[0].includes('strMeasure') && element[1]));
-    return (ingredients.map((element, index) => (
-      <li key={ element[0] } data-testid={ `${index}-ingredient-name-and-measure` }>
-        {`${element[1]} - ${measures[index][1]}`}
-      </li>)));
+  // copy clipboard feito com a biblioteca https://www.npmjs.com/package/clipboard-copy
+  const handleFavBtn = () => {
+    const saveClipboard = `http://localhost:3000${history.location.pathname}`;
+    setCopiedLink(true);
+    copy(saveClipboard);
   };
 
-  const listLimit = 6;
+  const handleFavoriteBtn = () => {
+    const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (recipeIsFavorite) {
+      const recipeIndex = favorite.findIndex((recipe) => meal.idMeal === recipe.id);
+      favorite.splice(recipeIndex, 1);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
+      setRecipeIsFavorite(false);
+    } else {
+      const recipeObj = {
+        id: meal.idMeal,
+        type: 'comida',
+        area: meal.strArea,
+        category: meal.strCategory,
+        alcoholicOrNot: '',
+        name: meal.strMeal,
+        image: meal.strMealThumb,
+      };
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...favorite, recipeObj]));
+      setRecipeIsFavorite(true);
+    }
+  };
+
   return (
     <section>
       <div>
@@ -46,30 +84,25 @@ export default function ReceitaComida(props) {
       <div>
         <div>
           <h2 data-testid="recipe-title">{meal.strMeal}</h2>
-          <button onClick={ () => {} } type="button">
-            <img
-              data-testid="share-btn"
-              src={ shareIcon }
-              alt="icone para compatilhr"
-            />
-          </button>
-          <button onClick={ () => {} } type="button">
-            <img
-              data-testid="favorite-btn"
-              src={ favoriteIcon }
-              alt="icone para favoritar"
-            />
-          </button>
+          <ImageButton
+            testid="share-btn"
+            onClick={ handleFavBtn }
+            imageSrc={ shareIcon }
+            altImage="icone para compatilhar"
+          />
+          { copiedLink && <p>Link copiado!</p>}
+          <ImageButton
+            testid="favorite-btn"
+            onClick={ handleFavoriteBtn }
+            imageSrc={ recipeIsFavorite ? favoriteIcon : unfavoriteIcon }
+            altImage="icone para favoritar"
+          />
         </div>
-
         <p data-testid="recipe-category">{meal.strCategory}</p>
       </div>
-      <div>
-        <h3>Ingredients</h3>
-        <ul>
-          {renderIngredients()}
-        </ul>
-      </div>
+      <ListaIngredientes
+        ingredientsList={ meal }
+      />
       <div>
         <h3>Instructions</h3>
         <p data-testid="instructions">{meal.strInstructions}</p>
@@ -79,32 +112,27 @@ export default function ReceitaComida(props) {
         <iframe title={ meal.strMeal } data-testid="video" src={ meal.strYoutube } />
       </div>
       <div>
-        <h3>Recomended</h3>
-        {recomendation.map((element, index) => (
-          index < listLimit
-          && (
-            <Link
-              key={ element.idDrink }
-              to={ `/bebidas/${element.idDrink}` }
-            >
-              <div
-                data-testid={ `${index}-recomendation-card` }
-                id={ `recomendationIndex${index}` }
-              >
-                <img src={ element.strDrinkThumb } alt={ element.strDrink } />
-                <p>{element.strAlcoholic}</p>
-                <h3 data-testid={ `${index}-recomendation-title` }>{element.strDrink}</h3>
-              </div>
-            </Link>)))}
+        { recomendation.length > 0 && <Recomendacao
+          recomendation={ recomendation }
+        /> }
       </div>
       <div className="buttonFixed">
         <Button
           testid="start-recipe-btn"
           onclick={ () => {} }
           labelText="Iniciar Receita"
+          key="startMealBtn"
         />
       </div>
 
     </section>
   );
 }
+
+ReceitaComida.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};

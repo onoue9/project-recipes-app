@@ -44,6 +44,8 @@ export default function CategoryFilter() {
         labelText="All"
         onClick={ handleButtonAll }
         testid="All-category-filter"
+        key="allBtn"
+        disabled={ false }
       />
     </div>
   );

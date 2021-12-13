@@ -63,6 +63,7 @@ function Login() {
         labelText="Entrar"
         disabled={ btnIsDisabled }
         onClick={ handleClick }
+        key="loginBtn"
       />
     </div>
   );
