@@ -15,11 +15,10 @@ export default function Recomendacao({ recomendation }) {
               <Link
                 key={ element.idDrink }
                 to={ `/bebidas/${element.idDrink}` }
+                className={ `recomendedCart index${index}` }
+                data-testid={ `${index}-recomendation-card` }
               >
-                <div
-                  data-testid={ `${index}-recomendation-card` }
-                  className="recomendedCart"
-                >
+                <div>
                   <img src={ element.strDrinkThumb } alt={ element.strDrink } />
                   <p>{element.strAlcoholic}</p>
                   <h3
@@ -42,11 +41,10 @@ export default function Recomendacao({ recomendation }) {
                 <Link
                   key={ element.idMeal }
                   to={ `/comidas/${element.idMeal}` }
+                  className={ `recomendedCart index${index}` }
+                  data-testid={ `${index}-recomendation-card` }
                 >
-                  <div
-                    data-testid={ `${index}-recomendation-card` }
-                    className="recomendedCart"
-                  >
+                  <div>
                     <img src={ element.strMealThumb } alt={ element.strMeal } />
                     <h3
                       data-testid={ `${index}-recomendation-title` }
