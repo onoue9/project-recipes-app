@@ -109,3 +109,11 @@ footer {
 .index5 {
   display: none;
 }
+
+.checked {
+  text-decoration: line-through;
+}
+
+.doneBtn {
+  display: none;
+}

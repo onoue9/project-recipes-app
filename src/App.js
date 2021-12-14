@@ -16,6 +16,8 @@ import ReceitasFeitas from './pages/ReceitasFeitas';
 import ReceitasFav from './pages/ReceitasFav';
 import ReceitaComida from './pages/ReceitaComida';
 import ReceitaBebida from './pages/ReceitaBebida';
+import RecComidaAndamento from './pages/RecComidaAndamento';
+import RecBebidaAndamento from './pages/RecBebidaAndamento';
 
 function App() {
   return (
@@ -36,12 +38,12 @@ function App() {
       <Route
         exact
         path="/comidas/:id/in-progress"
-        render={ (props) => <xx { ...props } /> }
+        render={ (props) => <RecComidaAndamento { ...props } /> }
       />
       <Route
         exact
         path="/bebidas/:id/in-progress"
-        render={ (props) => <xx { ...props } /> }
+        render={ (props) => <RecBebidaAndamento { ...props } /> }
       />
       <Route exact path="/explorar" component={ Explorar } />
       <Route exact path="/explorar/comidas" component={ ExplorarComidas } />

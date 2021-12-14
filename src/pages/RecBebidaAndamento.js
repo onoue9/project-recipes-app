@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import unfavoriteIcon from '../images/whiteHeartIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
-import Button from '../components/Button';
 import ImageButton from '../components/ImageButton';
-import ListaIngredientes from '../components/ListaIngredientes';
-import Recomendacao from '../components/Recomendacao';
-import { inProgressRecipesVerifier, doneRecipesVerifier }
-  from '../services/serviceInProgress';
+import ListaIngredientesEdit from '../components/ListaIngredientesEdit';
+import EndButton from '../components/EndButton';
+import { drinkInProgress } from '../services/serviceInProgress';
 
-export default function ReceitaBebida(props) {
+export default function RecComidaAndamento(props) {
   const { match: { params: { id } } } = props;
-  const history = useHistory();
   const [drink, setDrink] = useState({});
-  const [recomendation, setRecomendation] = useState([]);
   const [recipeIsFavorite, setRecipeIsFavorite] = useState(false);
+  const [inProgressList, setInProgressList] = useState({});
   const [copiedLink, setCopiedLink] = useState(false);
 
   const checkRecipeFavorite = (idDrink) => {
@@ -37,21 +33,16 @@ export default function ReceitaBebida(props) {
     checkRecipeFavorite(result.drinks[0].idDrink);
   };
 
-  const fetchRecomendation = async () => {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-    const result = await response.json();
-    setRecomendation(result.meals);
-  };
-
   useEffect(() => {
     fetchRecipe();
-    fetchRecomendation();
+    const newInProgress = drinkInProgress(id);
+    setInProgressList(newInProgress);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // copy clipboard feito com a biblioteca https://www.npmjs.com/package/clipboard-copy
-  const handleFavBtn = () => {
-    const saveClipboard = `http://localhost:3000${history.location.pathname}`;
+  const handleShareBtn = () => {
+    const saveClipboard = `http://localhost:3000/bebidas/${id}`;
     setCopiedLink(true);
     copy(saveClipboard);
   };
@@ -78,8 +69,29 @@ export default function ReceitaBebida(props) {
     }
   };
 
-  const handleStartRecipeBtn = () => {
-    history.push(`/bebidas/${id}/in-progress`);
+  const handleCheckboxChange = ({ target }) => {
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (target.checked) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        meals: { ...inProgress.meals },
+        cocktails: { ...inProgress.cocktails,
+          [id]: [...inProgress.cocktails[id],
+            target.name] } }));
+      setInProgressList({
+        meals: { ...inProgress.meals },
+        cocktails: { ...inProgress.cocktails,
+          [id]: [...inProgress.cocktails[id],
+            target.name] } });
+    } else {
+      const index = inProgress.cocktails[id]
+        .findIndex((ingredient) => ingredient === target.name);
+      inProgress.cocktails[id].splice(index, 1);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        meals: { ...inProgress.meals },
+        cocktails: { ...inProgress.cocktails,
+          [id]: inProgress.cocktails[id] } }));
+      setInProgressList(inProgress);
+    }
   };
 
   return (
@@ -96,7 +108,7 @@ export default function ReceitaBebida(props) {
           <h2 data-testid="recipe-title">{drink.strDrink}</h2>
           <ImageButton
             testid="share-btn"
-            onClick={ handleFavBtn }
+            onClick={ handleShareBtn }
             imageSrc={ shareIcon }
             altImage="icone para compatilhar"
           />
@@ -110,39 +122,27 @@ export default function ReceitaBebida(props) {
         </div>
         <p data-testid="recipe-category">{drink.strAlcoholic}</p>
       </div>
-      <ListaIngredientes
+      <ListaIngredientesEdit
         ingredientsList={ drink }
+        onChange={ handleCheckboxChange }
+        dataList={ inProgressList }
       />
       <div>
         <h3>Instructions</h3>
         <p data-testid="instructions">{drink.strInstructions}</p>
       </div>
-      <div>
-        { recomendation.length > 0 && <Recomendacao
-          recomendation={ recomendation }
-        /> }
-      </div>
-      <div>
-        <Button
-          className={ doneRecipesVerifier(id) ? 'buttonFixed doneBtn' : 'buttonFixed' }
-          testid="start-recipe-btn"
-          onClick={ handleStartRecipeBtn }
-          labelText={ inProgressRecipesVerifier(id)
-            ? 'Continuar Receita'
-            : 'Iniciar Receita' }
-          key="startDrinkBtn"
-          disabled={ false }
-        />
-      </div>
-
+      <EndButton
+        food={ drink }
+        inProgressList={ inProgressList }
+      />
     </section>
   );
 }
 
-ReceitaBebida.propTypes = {
+RecComidaAndamento.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.string.isRequired,
     }),
   }).isRequired,
 };
