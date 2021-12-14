@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import unfavoriteIcon from '../images/whiteHeartIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
-import Button from '../components/Button';
 import ImageButton from '../components/ImageButton';
 import ListaIngredientesEdit from '../components/ListaIngredientesEdit';
+import EndButton from '../components/EndButton';
+import { mealInProgress } from '../services/serviceInProgress';
 
 export default function RecComidaAndamento(props) {
   const { match: { params: { id } } } = props;
-  const history = useHistory();
   const [meal, setMeal] = useState({});
   const [recipeIsFavorite, setRecipeIsFavorite] = useState(false);
   const [inProgressList, setInProgressList] = useState({});
@@ -36,18 +35,14 @@ export default function RecComidaAndamento(props) {
 
   useEffect(() => {
     fetchRecipe();
-    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (!inProgress) {
-      localStorage.setItem('inProgressRecipes',
-        JSON.stringify({ cocktails: {}, meals: { [id]: [] } }));
-    }
-    setInProgressList(inProgress);
+    const newInProgress = mealInProgress(id);
+    setInProgressList(newInProgress);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // copy clipboard feito com a biblioteca https://www.npmjs.com/package/clipboard-copy
   const handleShareBtn = () => {
-    const saveClipboard = `http://localhost:3000${history.location.pathname}`;
+    const saveClipboard = `http://localhost:3000/comidas/${id}`;
     setCopiedLink(true);
     copy(saveClipboard);
   };
@@ -77,11 +72,14 @@ export default function RecComidaAndamento(props) {
   const handleCheckboxChange = ({ target }) => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (target.checked) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...inProgress,
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        cocktails: { ...inProgress.cocktails },
         meals: { ...inProgress.meals,
           [id]: [...inProgress.meals[id],
-            target.name] } }));
-      setInProgressList({ ...inProgress,
+            target.name] },
+      }));
+      setInProgressList({
+        cocktails: { ...inProgress.cocktails },
         meals: { ...inProgress.meals,
           [id]: [...inProgress.meals[id],
             target.name] } });
@@ -89,7 +87,8 @@ export default function RecComidaAndamento(props) {
       const index = inProgress.meals[id]
         .findIndex((ingredient) => ingredient === target.name);
       inProgress.meals[id].splice(index, 1);
-      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...inProgress,
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        cocktails: { ...inProgress.cocktails },
         meals: { ...inProgress.meals,
           [id]: inProgress.meals[id] } }));
       setInProgressList(inProgress);
@@ -129,15 +128,10 @@ export default function RecComidaAndamento(props) {
         <h3>Instructions</h3>
         <p data-testid="instructions">{meal.strInstructions}</p>
       </div>
-      <div className="buttonFixedRecipe">
-        <Button
-          testid="finish-recipe-btn"
-          onClick={ () => {} }
-          labelText="Finalizar Receita"
-          key="finishMealBtn"
-        />
-      </div>
-
+      <EndButton
+        food={ meal }
+        inProgressList={ inProgressList }
+      />
     </section>
   );
 }
@@ -145,7 +139,7 @@ export default function RecComidaAndamento(props) {
 RecComidaAndamento.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.string.isRequired,
     }),
   }).isRequired,
 };

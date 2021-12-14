@@ -9,6 +9,8 @@ import Button from '../components/Button';
 import ImageButton from '../components/ImageButton';
 import ListaIngredientes from '../components/ListaIngredientes';
 import Recomendacao from '../components/Recomendacao';
+import { inProgressRecipesVerifier, doneRecipesVerifier }
+  from '../services/serviceInProgress';
 
 export default function ReceitaComida(props) {
   const { match: { params: { id } } } = props;
@@ -120,11 +122,14 @@ export default function ReceitaComida(props) {
           recomendation={ recomendation }
         /> }
       </div>
-      <div className="buttonFixed">
+      <div>
         <Button
+          className={ doneRecipesVerifier(id) ? 'buttonFixed doneBtn' : 'buttonFixed' }
           testid="start-recipe-btn"
           onClick={ handleStartRecipeBtn }
-          labelText="Iniciar Receita"
+          labelText={ inProgressRecipesVerifier(id)
+            ? 'Continuar Receita'
+            : 'Iniciar Receita' }
           key="startMealBtn"
           disabled={ false }
         />

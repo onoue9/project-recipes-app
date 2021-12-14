@@ -113,3 +113,7 @@ footer {
 .checked {
   text-decoration: line-through;
 }
+
+.doneBtn {
+  display: none;
+}

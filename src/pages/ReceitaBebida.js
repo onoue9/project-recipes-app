@@ -9,6 +9,8 @@ import Button from '../components/Button';
 import ImageButton from '../components/ImageButton';
 import ListaIngredientes from '../components/ListaIngredientes';
 import Recomendacao from '../components/Recomendacao';
+import { inProgressRecipesVerifier, doneRecipesVerifier }
+  from '../services/serviceInProgress';
 
 export default function ReceitaBebida(props) {
   const { match: { params: { id } } } = props;
@@ -76,6 +78,10 @@ export default function ReceitaBebida(props) {
     }
   };
 
+  const handleStartRecipeBtn = () => {
+    history.push(`/bebidas/${id}/in-progress`);
+  };
+
   return (
     <section>
       <div>
@@ -116,12 +122,16 @@ export default function ReceitaBebida(props) {
           recomendation={ recomendation }
         /> }
       </div>
-      <div className="buttonFixed">
+      <div>
         <Button
+          className={ doneRecipesVerifier(id) ? 'buttonFixed doneBtn' : 'buttonFixed' }
           testid="start-recipe-btn"
-          onclick={ () => {} }
-          labelText="Iniciar Receita"
+          onClick={ handleStartRecipeBtn }
+          labelText={ inProgressRecipesVerifier(id)
+            ? 'Continuar Receita'
+            : 'Iniciar Receita' }
           key="startDrinkBtn"
+          disabled={ false }
         />
       </div>
 

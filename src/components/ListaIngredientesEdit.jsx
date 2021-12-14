@@ -8,14 +8,13 @@ export default function ListaIngredientesEdit({ ingredientsList, onChange, dataL
         return dataList.meals[ingredientsList.idMeal]
           .some((ingredient) => ingredient === name);
       }
-      return dataList.drinks[ingredientsList.idDrink]
+      return dataList.cocktails[ingredientsList.idDrink]
         .some((ingredient) => ingredient === name);
     }
     return false;
   };
 
   const renderIngredients = () => {
-    console.log('rodou');
     const ingredients = Object.entries(ingredientsList).filter((element) => (
       element[0].includes('strIngredient') && element[1]));
     const measures = Object.entries(ingredientsList).filter((element) => (
@@ -25,10 +24,10 @@ export default function ListaIngredientesEdit({ ingredientsList, onChange, dataL
         htmlFor={ element[0] }
         key={ element[0] }
         className={ isChecked(element[1]) ? 'checked' : '' }
+        data-testid={ `${index}-ingredient-step` }
       >
         <input
           id={ element[0] }
-          data-testid={ `${index}-ingredient-step` }
           type="checkbox"
           checked={ isChecked(element[1]) }
           onChange={ onChange }
