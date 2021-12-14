@@ -7,15 +7,14 @@ import unfavoriteIcon from '../images/whiteHeartIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
 import Button from '../components/Button';
 import ImageButton from '../components/ImageButton';
-import ListaIngredientes from '../components/ListaIngredientes';
-import Recomendacao from '../components/Recomendacao';
+import ListaIngredientesEdit from '../components/ListaIngredientesEdit';
 
-export default function ReceitaComida(props) {
+export default function RecComidaAndamento(props) {
   const { match: { params: { id } } } = props;
   const history = useHistory();
   const [meal, setMeal] = useState({});
-  const [recomendation, setRecomendation] = useState([]);
   const [recipeIsFavorite, setRecipeIsFavorite] = useState(false);
+  const [inProgressList, setInProgressList] = useState({});
   const [copiedLink, setCopiedLink] = useState(false);
 
   const checkRecipeFavorite = (idMeal) => {
@@ -35,15 +34,14 @@ export default function ReceitaComida(props) {
     checkRecipeFavorite(result.meals[0].idMeal);
   };
 
-  const fetchRecomendation = async () => {
-    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-    const result = await response.json();
-    setRecomendation(result.drinks);
-  };
-
   useEffect(() => {
     fetchRecipe();
-    fetchRecomendation();
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!inProgress) {
+      localStorage.setItem('inProgressRecipes',
+        JSON.stringify({ cocktails: {}, meals: { [id]: [] } }));
+    }
+    setInProgressList(inProgress);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,8 +74,26 @@ export default function ReceitaComida(props) {
     }
   };
 
-  const handleStartRecipeBtn = () => {
-    history.push(`/comidas/${id}/in-progress`);
+  const handleCheckboxChange = ({ target }) => {
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (target.checked) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...inProgress,
+        meals: { ...inProgress.meals,
+          [id]: [...inProgress.meals[id],
+            target.name] } }));
+      setInProgressList({ ...inProgress,
+        meals: { ...inProgress.meals,
+          [id]: [...inProgress.meals[id],
+            target.name] } });
+    } else {
+      const index = inProgress.meals[id]
+        .findIndex((ingredient) => ingredient === target.name);
+      inProgress.meals[id].splice(index, 1);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({ ...inProgress,
+        meals: { ...inProgress.meals,
+          [id]: inProgress.meals[id] } }));
+      setInProgressList(inProgress);
+    }
   };
 
   return (
@@ -104,29 +120,21 @@ export default function ReceitaComida(props) {
         </div>
         <p data-testid="recipe-category">{meal.strCategory}</p>
       </div>
-      <ListaIngredientes
+      <ListaIngredientesEdit
         ingredientsList={ meal }
+        onChange={ handleCheckboxChange }
+        dataList={ inProgressList }
       />
       <div>
         <h3>Instructions</h3>
         <p data-testid="instructions">{meal.strInstructions}</p>
       </div>
-      <div>
-        <h3>Video</h3>
-        <iframe title={ meal.strMeal } data-testid="video" src={ meal.strYoutube } />
-      </div>
-      <div>
-        { recomendation.length > 0 && <Recomendacao
-          recomendation={ recomendation }
-        /> }
-      </div>
-      <div className="buttonFixed">
+      <div className="buttonFixedRecipe">
         <Button
-          testid="start-recipe-btn"
-          onClick={ handleStartRecipeBtn }
-          labelText="Iniciar Receita"
-          key="startMealBtn"
-          disabled={ false }
+          testid="finish-recipe-btn"
+          onClick={ () => {} }
+          labelText="Finalizar Receita"
+          key="finishMealBtn"
         />
       </div>
 
@@ -134,7 +142,7 @@ export default function ReceitaComida(props) {
   );
 }
 
-ReceitaComida.propTypes = {
+RecComidaAndamento.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
