@@ -11,7 +11,9 @@ export default function DrinksCart() {
         && (apiResult.map((drink, index) => (
           index <= listLimit
               && (
-                <Link to={ `/bebidas/${drink.idDrink}` }>
+                <Link
+                  to={ `/bebidas/${drink.idDrink}` }
+                >
                   <div data-testid={ `${index}-recipe-card` } key={ drink.idDrink }>
                     <img
                       src={ drink.strDrinkThumb }

@@ -30,6 +30,11 @@ Input.propTypes = {
   testid: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  labelText: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
+  name: PropTypes.string,
+};
+
+Input.defaultProps = {
+  labelText: '',
+  name: '',
 };

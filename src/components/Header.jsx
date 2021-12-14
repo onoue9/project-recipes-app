@@ -6,6 +6,7 @@ import search from '../images/searchIcon.svg';
 import Input from './Input';
 import Button from './Button';
 import Context from '../context/Context';
+import ImageButton from './ImageButton';
 
 export default function Header({ title, disabled = false }) {
   const [enableInput, setEnableInput] = useState(false);
@@ -40,24 +41,22 @@ export default function Header({ title, disabled = false }) {
 
   return (
     <div>
-      <button onClick={ handleProfileClick } type="button">
-        <img
-          data-testid="profile-top-btn"
-          src={ profile }
-          alt="foto de perfil"
-        />
-      </button>
+      <ImageButton
+        testid="profile-top-btn"
+        onClick={ handleProfileClick }
+        imageSrc={ profile }
+        altImage="foto de perfil"
+      />
       <h2 data-testid="page-title">{ title }</h2>
       { !disabled
       && (
         <div>
-          <button onClick={ handleSearchClick } type="button">
-            <img
-              data-testid="search-top-btn"
-              src={ search }
-              alt="icone de busca"
-            />
-          </button>
+          <ImageButton
+            testid="search-top-btn"
+            onClick={ handleSearchClick }
+            imageSrc={ search }
+            altImage="icone de busca"
+          />
           { enableInput
           && (
             <div>
@@ -96,6 +95,7 @@ export default function Header({ title, disabled = false }) {
                 <Button
                   testid="exec-search-btn"
                   labelText="Buscar"
+                  disabled={ false }
                   onClick={ handleSearchBtn }
                 />
               </div>
@@ -110,5 +110,9 @@ export default function Header({ title, disabled = false }) {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  disabled: false,
 };

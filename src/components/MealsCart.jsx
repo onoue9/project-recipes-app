@@ -11,7 +11,9 @@ export default function MealsCart() {
         && (apiResult.map((meal, index) => (
           index <= listLimit
               && (
-                <Link to={ `/comidas/${meal.idMeal}` }>
+                <Link
+                  to={ `/comidas/${meal.idMeal}` }
+                >
                   <div data-testid={ `${index}-recipe-card` } key={ meal.idMeal }>
                     <img
                       src={ meal.strMealThumb }
