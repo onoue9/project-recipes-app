@@ -89,6 +89,7 @@ export default function ReceitaBebida(props) {
           src={ drink.strDrinkThumb }
           data-testid="recipe-photo"
           alt={ drink.strDrink }
+          className="mainImage"
         />
       </div>
       <div>

@@ -117,3 +117,7 @@ footer {
 .doneBtn {
   display: none;
 }
+
+.mainImage {
+  width: 360px;
+}

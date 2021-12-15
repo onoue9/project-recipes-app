@@ -85,7 +85,12 @@ export default function ReceitaComida(props) {
   return (
     <section>
       <div>
-        <img src={ meal.strMealThumb } data-testid="recipe-photo" alt={ meal.strMeal } />
+        <img
+          src={ meal.strMealThumb }
+          data-testid="recipe-photo"
+          alt={ meal.strMeal }
+          className="mainImage"
+        />
       </div>
       <div>
         <div>
