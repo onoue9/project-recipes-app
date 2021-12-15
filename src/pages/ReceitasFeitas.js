@@ -5,17 +5,19 @@ import DoneCard from '../components/DoneCard';
 
 export default function ReceitasFeitas() {
   const [allDoneRecipes, setAllDoneRecipes] = useState([]);
-  const [foosDoneRecipes, setFoodDoneRecipes] = useState([]);
+  const [foodDoneRecipes, setFoodDoneRecipes] = useState([]);
   const [drinksDoneRecipes, setDrinksDoneRecipes] = useState([]);
   const [renderState, setRenderState] = useState('all');
 
   const getRecipesFromStorage = () => {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    const foodRecipes = doneRecipes.filter((recipe) => recipe.type === 'comida');
-    const drinksRecipes = doneRecipes.filter((recipe) => recipe.type === 'bebida');
-    setAllDoneRecipes(doneRecipes);
-    setFoodDoneRecipes(foodRecipes);
-    setDrinksDoneRecipes(drinksRecipes);
+    if (doneRecipes) {
+      const foodRecipes = doneRecipes.filter((recipe) => recipe.type === 'comida');
+      const drinksRecipes = doneRecipes.filter((recipe) => recipe.type === 'bebida');
+      setAllDoneRecipes(doneRecipes);
+      setFoodDoneRecipes(foodRecipes);
+      setDrinksDoneRecipes(drinksRecipes);
+    }
   };
 
   const recipeCard = (recipeData) => recipeData.map((recipe, index) => (
@@ -35,7 +37,7 @@ export default function ReceitasFeitas() {
 
     case 'comida':
       return (
-        recipeCard(foosDoneRecipes)
+        recipeCard(foodDoneRecipes)
       );
 
     case 'bebida':
