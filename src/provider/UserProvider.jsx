@@ -32,7 +32,6 @@ function UserProvider({ children }) {
     } else {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
-    fetchRandonRecipe()
   }
 
   async function fetchCategoryAPI(adressParameter = 'themealdb') {
@@ -48,13 +47,6 @@ function UserProvider({ children }) {
     }
   }
 
-  const fetchRandonRecipe = async () => {
-    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-    const result = await response.json();
-    console.log(result);
-    // history.push(`/bebidas/${result.drinks[0].idDrink}`);
-  };
-
   const ContextObj = {
     apiResult,
     setApiResult,
@@ -66,7 +58,6 @@ function UserProvider({ children }) {
     fetchCategoryAPI,
     categorySelected,
     setCategorySelected,
-    fetchRandonRecipe,
   };
 
   return (
