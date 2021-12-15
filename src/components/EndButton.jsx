@@ -34,8 +34,8 @@ export default function EndButton(props) {
         alcoholicOrNot: '',
         name: food.strMeal,
         image: food.strMealThumb,
-        doneDate: Date.now(),
-        tags: food.strTags,
+        doneDate: new Intl.DateTimeFormat('pt-BR').format(new Date()),
+        tags: food.strTags ? food.strTags.split(',') : [],
       };
       const array = doneRecipes
         ? [...doneRecipes, finishedRecipesMeal]
@@ -50,8 +50,8 @@ export default function EndButton(props) {
         alcoholicOrNot: food.strAlcoholic,
         name: food.strDrink,
         image: food.strDrinkThumb,
-        doneDate: Date.now(),
-        tags: food.strTags,
+        doneDate: new Intl.DateTimeFormat('pt-BR').format(new Date()),
+        tags: food.strTags ? food.strTags.split(',') : [],
       };
       const arrayDrinks = doneRecipes
         ? [...doneRecipes, finishedRecipesDrink]
