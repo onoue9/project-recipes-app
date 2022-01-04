@@ -6,8 +6,8 @@ import Context from '../context/Context';
 import CategoryFilter from '../components/CategoryFilter';
 
 export default function Comidas() {
-  const { setMealOrDrink, fetchAPI,
-    fetchCategoryAPI, setCategorySelected,
+  const { setMealOrDrink, fetchAPI, fetchCategoryAPI,
+    setCategorySelected,
   } = useContext(Context);
   const meal = 'themealdb';
   const filter = 'search.php?s=';

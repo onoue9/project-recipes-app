@@ -44,16 +44,7 @@ export function doneRecipesVerifier(id) {
 
 export function inProgressRecipesVerifier(id) {
   const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if (inProgress) {
-    if (inProgress.cocktails[id]) {
-      return true;
-    }
-    if (inProgress.meals[id]) {
-      console.log('chegou');
-      return true;
-    }
-    console.log('false');
-    return false;
-  }
-  return false;
+  return !!(inProgress
+    && ((inProgress.cocktails && inProgress.cocktails[id])
+    || (inProgress.meals && inProgress.meals[id])));
 }
