@@ -23,10 +23,6 @@ export default function AreaSearch({ areaList }) {
     setAreaSelected(target.value);
   }
 
-  // useEffect(() => {
-  //   fetchApiFilterArea();
-  // }, []);
-
   useEffect(() => {
     fetchApiFilterArea(areaSelected);
   }, [areaSelected]);

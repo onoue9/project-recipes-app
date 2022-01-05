@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
@@ -15,6 +16,7 @@ export default function RecComidaAndamento(props) {
   const [recipeIsFavorite, setRecipeIsFavorite] = useState(false);
   const [inProgressList, setInProgressList] = useState({});
   const [copiedLink, setCopiedLink] = useState(false);
+  const history = useHistory();
 
   const checkRecipeFavorite = (idDrink) => {
     const favorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -96,6 +98,12 @@ export default function RecComidaAndamento(props) {
 
   return (
     <section>
+      <button
+        type="button"
+        onClick={ () => { history.push('/bebidas'); } }
+      >
+        Home
+      </button>
       <div>
         <img
           src={ drink.strDrinkThumb }

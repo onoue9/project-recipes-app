@@ -84,6 +84,12 @@ export default function ReceitaComida(props) {
 
   return (
     <section>
+      <button
+        type="button"
+        onClick={ () => { history.push('/comidas'); } }
+      >
+        Home
+      </button>
       <div>
         <img
           src={ meal.strMealThumb }

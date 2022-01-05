@@ -84,6 +84,12 @@ export default function ReceitaBebida(props) {
 
   return (
     <section>
+      <button
+        type="button"
+        onClick={ () => { history.push('/bebidas'); } }
+      >
+        Home
+      </button>
       <div>
         <img
           src={ drink.strDrinkThumb }
