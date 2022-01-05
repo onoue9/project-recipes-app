@@ -18,6 +18,7 @@ import ReceitaComida from './pages/ReceitaComida';
 import ReceitaBebida from './pages/ReceitaBebida';
 import RecComidaAndamento from './pages/RecComidaAndamento';
 import RecBebidaAndamento from './pages/RecBebidaAndamento';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
       <Route exact path="/perfil" component={ Perfil } />
       <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
       <Route exact path="/receitas-favoritas" component={ ReceitasFav } />
+      <Route path="/*" component={ NotFound } />
     </Switch>
   );
 }
