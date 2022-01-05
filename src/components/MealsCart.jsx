@@ -6,7 +6,7 @@ export default function MealsCart() {
   const { apiResult } = useContext(Context);
   const listLimit = 11;
   return (
-    <div>
+    <div className="deckSection">
       { apiResult.length >= 1
         && (apiResult.map((meal, index) => (
           index <= listLimit
@@ -14,7 +14,11 @@ export default function MealsCart() {
                 <Link
                   to={ `/comidas/${meal.idMeal}` }
                 >
-                  <div data-testid={ `${index}-recipe-card` } key={ meal.idMeal }>
+                  <div
+                    data-testid={ `${index}-recipe-card` }
+                    key={ meal.idMeal }
+                    className="recipeCard"
+                  >
                     <img
                       src={ meal.strMealThumb }
                       alt={ meal.strMeal }

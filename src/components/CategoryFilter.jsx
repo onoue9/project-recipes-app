@@ -27,7 +27,7 @@ export default function CategoryFilter() {
   };
 
   return (
-    <div>
+    <div className="categoryBar">
       { apiCategoryResult.length >= 1
         && apiCategoryResult.map((category, index) => (
           index < listLimit && (
@@ -37,6 +37,7 @@ export default function CategoryFilter() {
               labelText={ category.strCategory }
               onClick={ handleCategoryButton }
               disabled={ false }
+              className="categoryBtn"
             />
           )
         )) }
@@ -46,6 +47,7 @@ export default function CategoryFilter() {
         testid="All-category-filter"
         key="allBtn"
         disabled={ false }
+        className="categoryBtn"
       />
     </div>
   );

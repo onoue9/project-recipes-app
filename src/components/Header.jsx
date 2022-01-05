@@ -40,26 +40,31 @@ export default function Header({ title, disabled = false }) {
   };
 
   return (
-    <div>
-      <ImageButton
-        testid="profile-top-btn"
-        onClick={ handleProfileClick }
-        imageSrc={ profile }
-        altImage="foto de perfil"
-      />
-      <h2 data-testid="page-title">{ title }</h2>
-      { !disabled
-      && (
-        <div>
-          <ImageButton
-            testid="search-top-btn"
-            onClick={ handleSearchClick }
-            imageSrc={ search }
-            altImage="icone de busca"
-          />
-          { enableInput
+    <header className="Header">
+      <div className="headerBar">
+        <ImageButton
+          testid="profile-top-btn"
+          onClick={ handleProfileClick }
+          imageSrc={ profile }
+          altImage="foto de perfil"
+          className="headerBtn"
+        />
+        { title === 'Explorar Ingredientes'
+          ? <h3 className="exploreIngr" data-testid="page-title">{ title }</h3>
+          : <h2 data-testid="page-title">{ title }</h2>}
+        { !disabled
+          ? (
+            <>
+              <ImageButton
+                testid="search-top-btn"
+                onClick={ handleSearchClick }
+                imageSrc={ search }
+                altImage="icone de busca"
+                className="headerBtn"
+              />
+              { enableInput
           && (
-            <div>
+            <div className="headerSearchBar">
               <Input
                 testid="search-input"
                 type="text"
@@ -67,7 +72,7 @@ export default function Header({ title, disabled = false }) {
                 onChange={ handleChangeSearch }
                 value={ inputValue }
               />
-              <div>
+              <div className="headerRadio">
                 <Input
                   testid="ingredient-search-radio"
                   type="radio"
@@ -92,19 +97,20 @@ export default function Header({ title, disabled = false }) {
                   name="SearchOption"
                   onChange={ handleChecked }
                 />
-                <Button
-                  testid="exec-search-btn"
-                  labelText="Buscar"
-                  disabled={ false }
-                  onClick={ handleSearchBtn }
-                />
               </div>
+              <Button
+                testid="exec-search-btn"
+                labelText="Buscar"
+                disabled={ false }
+                onClick={ handleSearchBtn }
+              />
             </div>
 
           )}
-        </div>
-      )}
-    </div>
+            </>
+          ) : <div className="divPadrao" />}
+      </div>
+    </header>
   );
 }
 

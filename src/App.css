@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Poppins:ital,wght@0,100;0,400;0,700;1,400;1,700&family=Rubik:wght@300;400&display=swap') ;
+
 .meals {
   align-items: center;
   background: #0fa36b;
@@ -14,20 +16,6 @@
   animation: shake 1s infinite ease;
   max-height: 80vh;
 }
-
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
 
 .meals > .logo {
   animation: shake 1.5s infinite ease;
@@ -67,8 +55,248 @@
   }
 }
 
+:root {
+
+  --laranja: #f81;
+
+  --laranja-claro: #f4d06f;
+
+  --branco: #fff8f0;
+
+  --azul-claro: #9dd9d2;
+
+  --azul: #392f5a;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+html {
+
+  --font: 'Poppins' , sans-serif;
+
+  --font-title: 'Poppins' , sans-serif;
+
+  --font-size: 1.2rem;
+
+  --color: #392f5a;
+
+  --color-light: #adf;
+
+  --color-dark: #018;
+
+  --radius: 0.2rem;
+}
+
 body {
-  max-width: 360px;
+  height: 640px;
+  margin: 0 auto;
+  width: 360px;
+}
+
+body, input, textarea, button {
+  font-family: var(--font);
+  font-size: var(--font-size);
+}
+
+h1, h2, h3 {
+  font-family: var(--font);
+}
+
+h1, h2, h3, p, ul {
+  margin: 1rem 0;
+}
+
+ul {
+  list-style: square;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+input:not( [ type = 'checkbox' ] ), textarea, select {
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  display: block;
+  padding: 0.8rem;
+  transition: 0.2s;
+  width: 100%;
+}
+
+input:focus, textarea:focus {
+  background: white;
+  border-color: var(--color);
+  box-shadow: 0 0 0 3px var(--color-light);
+  outline: none;
+}
+
+button {
+  background: var(--color);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--color-dark);
+  cursor: pointer;
+  padding: 0.8rem 1.6rem;
+  transition: 0.1s;
+}
+
+hr {
+  border: 2px solid black;
+  margin: 2rem auto;
+}
+
+button:disabled {
+  opacity: 50%;
+}
+
+/* -----Login----- */
+.loginPage {
+  background-color: var(--laranja);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+}
+
+.logoImg {
+  align-self: center;
+  width: 30vw;
+}
+
+.loginPage div {
+  align-self: center;
+  margin: 5px 0;
+  width: 70vw;
+}
+
+.loginBtn {
+  border-radius: 15px;
+  color: var(--branco);
+  font-weight: 700;
+}
+
+/* -----Header----- */
+.Header {
+  background-color: var(--laranja);
+  width: 100vw;
+}
+
+.headerBar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.divPadrao {
+  height: 55.59px;
+  visibility: hidden;
+  width: 81.19px;
+}
+
+.headerBar h2 {
+  font-size: 1.4rem;
+  margin-top: 5px;
+}
+
+.exploreIngr {
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+.headerBtn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.headerSearchBar {
+  align-items: center;
+  background-color: var(--azul-claro);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100vw;
+}
+
+.headerSearchBar input[ type = 'text' ] {
+  height: 40px;
+  margin: 5px 0;
+  width: 70vw;
+}
+
+.headerSearchBar button {
+  border-radius: 15px;
+  color: var(--branco);
+  font-weight: 700;
+  height: 40px;
+  margin-bottom: 8px;
+  padding: 0 20px;
+}
+
+.headerRadio {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+}
+
+.categoryBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 8px;
+  text-align: center;
+  width: 100vw;
+}
+
+.categoryBtn {
+  border-radius: 10px;
+  color: var(--branco);
+  height: 30px;
+  margin-bottom: 8px;
+  padding: 0;
+  width: 30vw;
+}
+
+/* -----Deck----- */
+.deckSection {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.recipeCard {
+  align-self: center;
+  background-color: var(--laranja-claro);
+  border-radius: 20px;
+  box-shadow: 4px 4px var(--azul);
+  width: 80vw;
+}
+
+.recipeCard img {
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+}
+
+.recipeCard p {
+  color: var(--azul);
+  font-size: 1.2rem;
+  font-weight: 700;
+  height: 40px;
+  padding-left: 15px;
+  padding-top: 5px;
+  width: 100%;
 }
 
 footer {

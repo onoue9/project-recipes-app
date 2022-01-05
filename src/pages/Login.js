@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import logo from '../images/recipes.png';
 // import Context from '../context/Context';
 
 function Login() {
@@ -43,7 +44,13 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="loginPage">
+      <img
+        className="logoImg"
+        src={ logo }
+        alt="app logo"
+      />
+      <h3>Trybe Recipes</h3>
       <Input
         testid="email-input"
         placeholder="E-mail"
@@ -64,6 +71,7 @@ function Login() {
         disabled={ btnIsDisabled }
         onClick={ handleClick }
         key="loginBtn"
+        className="loginBtn"
       />
     </div>
   );

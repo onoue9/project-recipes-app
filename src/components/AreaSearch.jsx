@@ -50,7 +50,7 @@ export default function AreaSearch({ areaList }) {
           </option>
         )) }
       </select>
-      <div>
+      <div className="deckSection">
         { recipesList.length > 0
         && (recipesList.map((meal, index) => (
           index <= listLimit
@@ -58,7 +58,11 @@ export default function AreaSearch({ areaList }) {
                 <Link
                   to={ `/comidas/${meal.idMeal}` }
                 >
-                  <div data-testid={ `${index}-recipe-card` } key={ meal.idMeal }>
+                  <div
+                    data-testid={ `${index}-recipe-card` }
+                    key={ meal.idMeal }
+                    className="recipeCard"
+                  >
                     <img
                       src={ meal.strMealThumb }
                       alt={ meal.strMeal }
