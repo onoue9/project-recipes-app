@@ -7,8 +7,8 @@ export default function IngredientsDeck({ list, address }) {
     <div>
       { list.map((ingredient, index) => (
         <Link
-          to={ address === 'themealdb' ? '/comidas' : '/bebidas' }
-          state={ { filter: 'filter.php?i=', value: ingredient.strIngredient } }
+          to={ { pathname: address === 'themealdb' ? '/comidas' : '/bebidas',
+            state: { filter: 'filter.php?i=', value: ingredient.strIngredient } } }
           key={ ingredient.strIngredient }
         >
           <div

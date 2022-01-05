@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import DrinksCart from '../components/DrinksCart';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -9,12 +10,14 @@ export default function Bebidas() {
   const { setMealOrDrink, fetchAPI, fetchCategoryAPI,
     setCategorySelected,
   } = useContext(Context);
+  const { state } = useLocation();
   const drink = 'thecocktaildb';
-  const filter = 'search.php?s=';
+  const filter = !state ? 'search.php?s=' : state.filter;
+  const value = !state ? '' : state.value;
 
   useEffect(() => {
     setMealOrDrink(drink);
-    fetchAPI(filter, drink);
+    fetchAPI(filter, drink, value);
     fetchCategoryAPI(drink);
     setCategorySelected('');
   // eslint-disable-next-line react-hooks/exhaustive-deps
