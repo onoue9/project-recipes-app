@@ -273,6 +273,8 @@ button:disabled {
   align-items: center;
   display: flex;
   flex-direction: column;
+  padding-bottom: 70px;
+  padding-top: 20px;
   width: 100vw;
 }
 
@@ -299,7 +301,174 @@ button:disabled {
   width: 100%;
 }
 
-footer {
+/* -----Explore----- */
+.exploreSection {
+  display: flex;
+  flex-direction: column;
+  height: 72vh;
+  justify-content: space-between;
+  text-align: center;
+  width: 100vw;
+}
+
+.imgExplore {
+  height: 250px;
+  width: 100%;
+}
+
+.exploreSection button {
+  border-radius: 15px;
+  color: var(--branco);
+  font-weight: 700;
+  width: 60vw;
+}
+
+/* -----ExploreFood----- */
+.exploreFoodSection {
+  display: flex;
+  flex-direction: column;
+  height: 76vh;
+  justify-content: space-between;
+  text-align: center;
+  width: 100vw;
+}
+
+.exploreFoodSection button {
+  border-radius: 15px;
+  color: var(--branco);
+  font-weight: 700;
+  width: 60vw;
+}
+
+/* -----ExploreIngredients----- */
+.ingredientDeck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 15px 0;
+  padding-bottom: 80px;
+  width: 100vw;
+}
+
+.ingredientCard {
+  background-color: var(--azul-claro);
+  border-radius: 15px;
+  box-shadow: 4px 4px var(--azul);
+  height: 147.5px;
+  margin: 10px;
+  text-align: center;
+  width: 40vw;
+}
+
+.ingredientCard h2 {
+  background-color: var(--laranja);
+  border-radius: 0 0 15px 15px;
+  color: var(--azul);
+  font-size: 1rem;
+  height: 47.5px;
+  padding: 5px 0;
+  padding-left: 15px;
+  text-align: start;
+}
+
+/* -----Recipe----- */
+.recipeSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.homeBtn {
+  background-color: var(--laranja);
+  border-radius: 15px;
+  box-shadow: 3px 3px var(--azul);
+  color: var(--azul);
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 20px;
+  padding: 0;
+  position: absolute;
+  width: 30vw;
+}
+
+.infoRecipes {
+  background-color: var(--branco);
+  border-radius: 15px 15px 0 0;
+  margin-top: 47vh;
+  padding: 0 20px;
+  padding-bottom: 70px;
+  padding-top: 50px;
+  position: absolute;
+  width: 100vw;
+}
+
+.recipeHeader {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 272px;
+  width: 100vw;
+  z-index: 1;
+}
+
+.recipeTitle {
+  background-color: var(--laranja-claro);
+  border: solid 0.5px var(--azul);
+  border-radius: 50px;
+  box-shadow: 2.5px 2.5px var(--azul);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px 15px;
+  width: 150px;
+}
+
+.recipeTitle h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.recipeTitle p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.interactionBtn {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.shareBtn {
+  background-color: var(--branco);
+  border: solid 0.5px var(--azul);
+  border-radius: 50%;
+  box-shadow: 2.5px 2.5px var(--azul);
+  height: 40px;
+  margin-right: 10px;
+  padding: 7px;
+  width: 40px;
+}
+
+.interactionBtn button {
+  background-color: transparent;
+  padding: 0;
+}
+
+.interactionBtn button img {
+  height: 23px;
+  width: 23px;
+}
+
+.copiedLink {
+  position: absolute;
+  top: 55px;
+}
+
+.btnDiv button {
+  background-color: var(--azul);
+  color: var(--branco);
+  font-weight: 700;
   bottom: 0;
   position: fixed;
   width: 100%;
@@ -314,12 +483,39 @@ footer {
 .recomendedList {
   display: flex;
   flex-direction: row;
+  margin-left: -20px;
   overflow: hidden;
   width: 360px;
 }
 
 .recomendedCart {
   width: 180px;
+}
+
+.recomendedCart p {
+  background-color: var(--laranja-claro);
+  color: var(--azul);
+  font-size: 1rem;
+  margin: 0;
+  padding-left: 15px;
+}
+
+.recomendedCart h3 {
+  background-color: var(--laranja-claro);
+  color: var(--azul);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  padding-left: 15px;
+}
+
+.recomendedCart img {
+  width: 100%;
+}
+
+.email {
+  font-size: 1.2rem;
+  font-weight: 400;
 }
 
 .index2 {
@@ -348,4 +544,27 @@ footer {
 
 .mainImage {
   width: 360px;
+}
+
+/* -----Footer----- */
+footer {
+  background-color: var(--laranja-claro);
+  bottom: 0;
+  height: 55px;
+  position: fixed;
+  width: 100%;
+}
+
+.footerBar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerBar button {
+  background-color: transparent;
+}
+
+.footerBar button img {
+  height: 30px;
 }

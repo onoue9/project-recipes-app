@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function IngredientsDeck({ list, address }) {
   return (
-    <div>
+    <div className="ingredientDeck">
       { list.map((ingredient, index) => (
         <Link
           to={ { pathname: address === 'themealdb' ? '/comidas' : '/bebidas',
@@ -13,6 +13,7 @@ export default function IngredientsDeck({ list, address }) {
         >
           <div
             data-testid={ `${index}-ingredient-card` }
+            className="ingredientCard"
           >
             <img
               src={ `https://www.${address}.com/images/ingredients/${ingredient.strIngredient}-Small.png` }

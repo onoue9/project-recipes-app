@@ -20,21 +20,23 @@ export default function ListaIngredientesEdit({ ingredientsList, onChange, dataL
     const measures = Object.entries(ingredientsList).filter((element) => (
       element[0].includes('strMeasure') && element[1]));
     return (ingredients.map((element, index) => (
-      <label
-        htmlFor={ element[0] }
-        key={ element[0] }
-        className={ isChecked(element[1]) ? 'checked' : '' }
-        data-testid={ `${index}-ingredient-step` }
-      >
-        <input
-          id={ element[0] }
-          type="checkbox"
-          checked={ isChecked(element[1]) }
-          onChange={ onChange }
-          name={ element[1] }
-        />
-        {`${element[1]} - ${!measures[index] ? 'to taste' : measures[index][1]}`}
-      </label>)));
+      <div key={ element[0] }>
+        <label
+          htmlFor={ element[0] }
+          className={ isChecked(element[1]) ? 'checked' : '' }
+          data-testid={ `${index}-ingredient-step` }
+        >
+          <input
+            id={ element[0] }
+            type="checkbox"
+            checked={ isChecked(element[1]) }
+            onChange={ onChange }
+            name={ element[1] }
+          />
+          {`${element[1]} - ${!measures[index] ? 'to taste' : measures[index][1]}`}
+        </label>
+      </div>
+    )));
   };
 
   return (

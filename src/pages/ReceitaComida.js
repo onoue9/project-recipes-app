@@ -83,10 +83,11 @@ export default function ReceitaComida(props) {
   };
 
   return (
-    <section>
+    <section className="recipeSection">
       <button
         type="button"
         onClick={ () => { history.push('/comidas'); } }
+        className="homeBtn"
       >
         Home
       </button>
@@ -98,42 +99,50 @@ export default function ReceitaComida(props) {
           className="mainImage"
         />
       </div>
-      <div>
-        <div>
+      <div className="recipeHeader">
+        <div className="recipeTitle">
           <h2 data-testid="recipe-title">{meal.strMeal}</h2>
-          <ImageButton
-            testid="share-btn"
-            onClick={ handleShareBtn }
-            imageSrc={ shareIcon }
-            altImage="icone para compatilhar"
-          />
-          { copiedLink && <p>Link copiado!</p>}
-          <ImageButton
-            testid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            imageSrc={ recipeIsFavorite ? favoriteIcon : unfavoriteIcon }
-            altImage="icone para favoritar"
-          />
+          <p data-testid="recipe-category">{meal.strCategory}</p>
         </div>
-        <p data-testid="recipe-category">{meal.strCategory}</p>
+        <div className="interactionBtn">
+          <div className="shareBtn">
+            <ImageButton
+              testid="share-btn"
+              onClick={ handleShareBtn }
+              imageSrc={ shareIcon }
+              altImage="icone para compatilhar"
+            />
+            { copiedLink && <p className="copiedLink">Link copiado!</p>}
+          </div>
+          <div className="shareBtn">
+            <ImageButton
+              testid="favorite-btn"
+              onClick={ handleFavoriteBtn }
+              imageSrc={ recipeIsFavorite ? favoriteIcon : unfavoriteIcon }
+              altImage="icone para favoritar"
+            />
+          </div>
+        </div>
       </div>
-      <ListaIngredientes
-        ingredientsList={ meal }
-      />
-      <div>
-        <h3>Instructions</h3>
-        <p data-testid="instructions">{meal.strInstructions}</p>
+      <div className="infoRecipes">
+        <ListaIngredientes
+          ingredientsList={ meal }
+        />
+        <div>
+          <h3>Instructions</h3>
+          <p data-testid="instructions">{meal.strInstructions}</p>
+        </div>
+        <div>
+          <h3>Video</h3>
+          <iframe title={ meal.strMeal } data-testid="video" src={ meal.strYoutube } />
+        </div>
+        <div>
+          { recomendation.length > 0 && <Recomendacao
+            recomendation={ recomendation }
+          /> }
+        </div>
       </div>
-      <div>
-        <h3>Video</h3>
-        <iframe title={ meal.strMeal } data-testid="video" src={ meal.strYoutube } />
-      </div>
-      <div>
-        { recomendation.length > 0 && <Recomendacao
-          recomendation={ recomendation }
-        /> }
-      </div>
-      <div>
+      <div className="btnDiv">
         <Button
           className={ doneRecipesVerifier(id) ? 'buttonFixed doneBtn' : 'buttonFixed' }
           testid="start-recipe-btn"
@@ -145,7 +154,6 @@ export default function ReceitaComida(props) {
           disabled={ false }
         />
       </div>
-
     </section>
   );
 }

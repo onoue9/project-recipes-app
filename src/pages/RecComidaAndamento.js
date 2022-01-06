@@ -98,48 +98,64 @@ export default function RecComidaAndamento(props) {
   };
 
   return (
-    <section>
+    <section className="recipeSection">
       <button
         type="button"
         onClick={ () => { history.push('/comidas'); } }
+        className="homeBtn"
       >
         Home
       </button>
       <div>
-        <img src={ meal.strMealThumb } data-testid="recipe-photo" alt={ meal.strMeal } />
+        <img
+          className="mainImage"
+          src={ meal.strMealThumb }
+          data-testid="recipe-photo"
+          alt={ meal.strMeal }
+        />
       </div>
-      <div>
-        <div>
+      <div className="recipeHeader">
+        <div className="recipeTitle">
           <h2 data-testid="recipe-title">{meal.strMeal}</h2>
-          <ImageButton
-            testid="share-btn"
-            onClick={ handleShareBtn }
-            imageSrc={ shareIcon }
-            altImage="icone para compatilhar"
-          />
-          { copiedLink && <p>Link copiado!</p>}
-          <ImageButton
-            testid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            imageSrc={ recipeIsFavorite ? favoriteIcon : unfavoriteIcon }
-            altImage="icone para favoritar"
-          />
+          <p data-testid="recipe-category">{meal.strCategory}</p>
         </div>
-        <p data-testid="recipe-category">{meal.strCategory}</p>
+        <div className="interactionBtn">
+          <div className="shareBtn">
+            <ImageButton
+              testid="share-btn"
+              onClick={ handleShareBtn }
+              imageSrc={ shareIcon }
+              altImage="icone para compatilhar"
+            />
+            { copiedLink && <p className="copiedLink">Link copiado!</p>}
+          </div>
+          <div className="shareBtn">
+            <ImageButton
+              testid="favorite-btn"
+              onClick={ handleFavoriteBtn }
+              imageSrc={ recipeIsFavorite ? favoriteIcon : unfavoriteIcon }
+              altImage="icone para favoritar"
+            />
+          </div>
+        </div>
       </div>
-      <ListaIngredientesEdit
-        ingredientsList={ meal }
-        onChange={ handleCheckboxChange }
-        dataList={ inProgressList }
-      />
-      <div>
-        <h3>Instructions</h3>
-        <p data-testid="instructions">{meal.strInstructions}</p>
+      <div className="infoRecipes">
+        <ListaIngredientesEdit
+          ingredientsList={ meal }
+          onChange={ handleCheckboxChange }
+          dataList={ inProgressList }
+        />
+        <div>
+          <h3>Instructions</h3>
+          <p data-testid="instructions">{meal.strInstructions}</p>
+        </div>
       </div>
-      <EndButton
-        food={ meal }
-        inProgressList={ inProgressList }
-      />
+      <div className="btnDiv">
+        <EndButton
+          food={ meal }
+          inProgressList={ inProgressList }
+        />
+      </div>
     </section>
   );
 }

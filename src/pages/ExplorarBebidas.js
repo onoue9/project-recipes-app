@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import expPicture from '../images/exploreDrinks.png';
 
 export default function ExplorarBebidas() {
   const history = useHistory();
@@ -16,18 +17,25 @@ export default function ExplorarBebidas() {
   return (
     <div>
       <Header title="Explorar Bebidas" disabled />
-      <Button
-        disabled={ false }
-        testid="explore-by-ingredient"
-        labelText="Por Ingredientes"
-        onClick={ () => { history.push('/explorar/bebidas/ingredientes'); } }
-      />
-      <Button
-        disabled={ false }
-        testid="explore-surprise"
-        labelText="Me Surpreenda!"
-        onClick={ fetchRandonRecipe }
-      />
+      <div className="exploreSection">
+        <img
+          className="imgExplore"
+          src={ expPicture }
+          alt="explore ilustration for Drink"
+        />
+        <Button
+          disabled={ false }
+          testid="explore-by-ingredient"
+          labelText="Por Ingredientes"
+          onClick={ () => { history.push('/explorar/bebidas/ingredientes'); } }
+        />
+        <Button
+          disabled={ false }
+          testid="explore-surprise"
+          labelText="Me Surpreenda!"
+          onClick={ fetchRandonRecipe }
+        />
+      </div>
       <Footer />
     </div>
   );

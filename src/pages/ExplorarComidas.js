@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import expPicture from '../images/exploreMeal.png';
 
 export default function ExplorarComidas() {
   const history = useHistory();
@@ -16,24 +17,31 @@ export default function ExplorarComidas() {
   return (
     <div>
       <Header title="Explorar Comidas" disabled />
-      <Button
-        disabled={ false }
-        testid="explore-by-ingredient"
-        labelText="Por Ingredientes"
-        onClick={ () => { history.push('/explorar/comidas/ingredientes'); } }
-      />
-      <Button
-        disabled={ false }
-        testid="explore-by-area"
-        labelText="Por Local de Origem"
-        onClick={ () => { history.push('/explorar/comidas/area'); } }
-      />
-      <Button
-        disabled={ false }
-        testid="explore-surprise"
-        labelText="Me Surpreenda!"
-        onClick={ fetchRandonRecipe }
-      />
+      <div className="exploreFoodSection">
+        <img
+          className="imgExplore"
+          src={ expPicture }
+          alt="explore ilustration for food"
+        />
+        <Button
+          disabled={ false }
+          testid="explore-by-ingredient"
+          labelText="Por Ingredientes"
+          onClick={ () => { history.push('/explorar/comidas/ingredientes'); } }
+        />
+        <Button
+          disabled={ false }
+          testid="explore-by-area"
+          labelText="Por Local de Origem"
+          onClick={ () => { history.push('/explorar/comidas/area'); } }
+        />
+        <Button
+          disabled={ false }
+          testid="explore-surprise"
+          labelText="Me Surpreenda!"
+          onClick={ fetchRandonRecipe }
+        />
+      </div>
       <Footer />
     </div>
   );

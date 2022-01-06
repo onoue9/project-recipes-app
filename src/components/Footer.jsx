@@ -22,24 +22,29 @@ export default function Footer() {
 
   return (
     <footer data-testid="footer">
-      <ImageButton
-        testid="drinks-bottom-btn"
-        onClick={ handleDrinkClick }
-        imageSrc={ drinkIcon }
-        altImage="icone de bebidas"
-      />
-      <ImageButton
-        testid="explore-bottom-btn"
-        onClick={ handleExploreClick }
-        imageSrc={ exploreIcon }
-        altImage="icone de explorar"
-      />
-      <ImageButton
-        testid="food-bottom-btn"
-        onClick={ handleMealClick }
-        imageSrc={ mealIcon }
-        altImage="icone de comidas"
-      />
+      <div className="footerBar">
+        <ImageButton
+          testid="drinks-bottom-btn"
+          onClick={ handleDrinkClick }
+          imageSrc={ drinkIcon }
+          altImage="icone de bebidas"
+          className="footerBtn"
+        />
+        <ImageButton
+          testid="explore-bottom-btn"
+          onClick={ handleExploreClick }
+          imageSrc={ exploreIcon }
+          altImage="icone de explorar"
+          className="footerBtn"
+        />
+        <ImageButton
+          testid="food-bottom-btn"
+          onClick={ handleMealClick }
+          imageSrc={ mealIcon }
+          altImage="icone de comidas"
+          className="footerBtn"
+        />
+      </div>
     </footer>
   );
 }

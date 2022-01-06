@@ -83,10 +83,11 @@ export default function ReceitaBebida(props) {
   };
 
   return (
-    <section>
+    <section className="recipeSection">
       <button
         type="button"
         onClick={ () => { history.push('/bebidas'); } }
+        className="homeBtn"
       >
         Home
       </button>
@@ -98,38 +99,46 @@ export default function ReceitaBebida(props) {
           className="mainImage"
         />
       </div>
-      <div>
-        <div>
+      <div className="recipeHeader">
+        <div className="recipeTitle">
           <h2 data-testid="recipe-title">{drink.strDrink}</h2>
-          <ImageButton
-            testid="share-btn"
-            onClick={ handleFavBtn }
-            imageSrc={ shareIcon }
-            altImage="icone para compatilhar"
-          />
-          { copiedLink && <p>Link copiado!</p>}
-          <ImageButton
-            testid="favorite-btn"
-            onClick={ handleFavoriteBtn }
-            imageSrc={ recipeIsFavorite ? favoriteIcon : unfavoriteIcon }
-            altImage="icone para favoritar"
-          />
+          <p data-testid="recipe-category">{drink.strAlcoholic}</p>
         </div>
-        <p data-testid="recipe-category">{drink.strAlcoholic}</p>
+        <div className="interactionBtn">
+          <div className="shareBtn">
+            <ImageButton
+              testid="share-btn"
+              onClick={ handleFavBtn }
+              imageSrc={ shareIcon }
+              altImage="icone para compatilhar"
+            />
+            { copiedLink && <p className="copiedLink">Link copiado!</p>}
+          </div>
+          <div className="shareBtn">
+            <ImageButton
+              testid="favorite-btn"
+              onClick={ handleFavoriteBtn }
+              imageSrc={ recipeIsFavorite ? favoriteIcon : unfavoriteIcon }
+              altImage="icone para favoritar"
+            />
+          </div>
+        </div>
       </div>
-      <ListaIngredientes
-        ingredientsList={ drink }
-      />
-      <div>
-        <h3>Instructions</h3>
-        <p data-testid="instructions">{drink.strInstructions}</p>
+      <div className="infoRecipes">
+        <ListaIngredientes
+          ingredientsList={ drink }
+        />
+        <div>
+          <h3>Instructions</h3>
+          <p data-testid="instructions">{drink.strInstructions}</p>
+        </div>
+        <div>
+          { recomendation.length > 0 && <Recomendacao
+            recomendation={ recomendation }
+          /> }
+        </div>
       </div>
-      <div>
-        { recomendation.length > 0 && <Recomendacao
-          recomendation={ recomendation }
-        /> }
-      </div>
-      <div>
+      <div className="btnDiv">
         <Button
           className={ doneRecipesVerifier(id) ? 'buttonFixed doneBtn' : 'buttonFixed' }
           testid="start-recipe-btn"
@@ -141,7 +150,6 @@ export default function ReceitaBebida(props) {
           disabled={ false }
         />
       </div>
-
     </section>
   );
 }
