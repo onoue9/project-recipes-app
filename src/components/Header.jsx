@@ -49,7 +49,7 @@ export default function Header({ title, disabled = false }) {
           altImage="foto de perfil"
           className="headerBtn"
         />
-        { title === 'Explorar Ingredientes'
+        { title === 'Explorar Ingredientes' || title === 'Receitas Favoritas'
           ? <h3 className="exploreIngr" data-testid="page-title">{ title }</h3>
           : <h2 data-testid="page-title">{ title }</h2>}
         { !disabled

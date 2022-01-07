@@ -57,30 +57,31 @@ export default function ReceitasFeitas() {
   return (
     <div>
       <Header title="Receitas Feitas" disabled />
-      <div>
-        <Button
-          labelText="All"
-          testid="filter-by-all-btn"
-          disabled={ false }
-          onClick={ () => { setRenderState('all'); } }
-          key="filter-by-all-btn"
-        />
-        <Button
-          labelText="Food"
-          testid="filter-by-food-btn"
-          disabled={ false }
-          onClick={ () => { setRenderState('comida'); } }
-          key="filter-by-food-btn"
-        />
-        <Button
-          labelText="Drinks"
-          testid="filter-by-drink-btn"
-          disabled={ false }
-          onClick={ () => { setRenderState('bebida'); } }
-          key="filter-by-drink-btn"
-        />
-        <div />
-        <div>
+      <div className="doneRecipesPage">
+        <div className="filterBtn">
+          <Button
+            labelText="All"
+            testid="filter-by-all-btn"
+            disabled={ false }
+            onClick={ () => { setRenderState('all'); } }
+            key="filter-by-all-btn"
+          />
+          <Button
+            labelText="Food"
+            testid="filter-by-food-btn"
+            disabled={ false }
+            onClick={ () => { setRenderState('comida'); } }
+            key="filter-by-food-btn"
+          />
+          <Button
+            labelText="Drinks"
+            testid="filter-by-drink-btn"
+            disabled={ false }
+            onClick={ () => { setRenderState('bebida'); } }
+            key="filter-by-drink-btn"
+          />
+        </div>
+        <div className="doneDeck">
           { renderRecipes() }
         </div>
       </div>

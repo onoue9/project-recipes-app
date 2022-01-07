@@ -546,6 +546,138 @@ button:disabled {
   width: 360px;
 }
 
+/* -----Done Recipes----- */
+.doneRecipesPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.filterBtn {
+  display: flex;
+  width: 100vw;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.filterBtn button {
+  border-radius: 10px;
+  color: var(--branco);
+  height: 30px;
+  margin-bottom: 8px;
+  padding: 0;
+  width: 30vw;
+}
+
+.doneDeck {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.doneCard {
+  align-self: center;
+  background-color: var(--laranja-claro);
+  border-radius: 20px;
+  box-shadow: 4px 4px var(--azul);
+  width: 80vw;
+  margin-bottom: 20px;
+}
+
+.doneCard img {
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+}
+
+.doneCard h3 {
+  color: var(--azul);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 5px 0 5px 15px;
+  width: 100%;
+  margin: 15px 0 0 0;
+}
+
+.doneCard h2 {
+  color: var(--azul);
+  font-size: 1.1rem;
+  padding: 5px 0 5px 15px;
+  width: 100%;
+  margin: 0;
+}
+
+.doneCard p {
+  color: var(--azul);
+  font-size: 1.0rem;
+  padding: 5px 0 5px 15px;
+  width: 100%;
+  margin: 0;
+}
+
+.doneDateMeal {
+  background-color: var(--azul-claro);
+}
+
+.doneDateDrink {
+  background-color: var(--azul-claro);
+  border-radius: 0 0 20px 20px;
+}
+
+.shareDoneBtn {
+  background-color: var(--branco);
+  border: solid 0.5px var(--azul);
+  border-radius: 50%;
+  box-shadow: 2.5px 2.5px var(--azul);
+  height: 40px;
+  padding: 5px;
+  width: 40px;
+  position: absolute;
+  margin-left: 240px;
+  margin-top: -20px;
+}
+
+.shareDoneBtn button {
+  background-color: transparent;
+  padding: 0;
+}
+
+.shareDoneBtn button img {
+  height: 25px;
+  width: 25px;
+}
+
+/* -----Favorite Recipes----- */
+.interactionFavBtn {
+  display: flex;
+  justify-content: space-evenly;
+  width: 25vw;
+  position: absolute;
+  margin-left: 195px;
+  margin-top: -103px;
+}
+
+.shareFavBtn {
+  background-color: var(--branco);
+  border: solid 0.5px var(--azul);
+  border-radius: 50%;
+  box-shadow: 2.5px 2.5px var(--azul);
+  height: 40px;
+  margin-right: 10px;
+  padding: 7px;
+  width: 40px;
+}
+
+.interactionFavBtn button {
+  background-color: transparent;
+  padding: 0;
+}
+
+.interactionFavBtn button img {
+  height: 23px;
+  width: 23px;
+}
+
 /* -----Footer----- */
 footer {
   background-color: var(--laranja-claro);

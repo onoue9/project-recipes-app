@@ -20,7 +20,7 @@ export default function DoneCard(props) {
   };
 
   return (
-    <div>
+    <div className="doneCard">
       <Link to={ `/${type}s/${id}` }>
         <img
           src={ image }
@@ -29,27 +29,34 @@ export default function DoneCard(props) {
           className="mainImage"
         />
       </Link>
-      <div>
-        <div>
-          <h3
-            data-testid={ `${index}-horizontal-top-text` }
-          >
-            { type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
-          </h3>
-          <Link to={ `/${type}s/${id}` }>
-            <h2 data-testid={ `${index}-horizontal-name` }>{ name }</h2>
-          </Link>
-        </div>
+      <div className="shareDoneBtn">
         <ImageButton
           testid={ `${index}-horizontal-share-btn` }
           onClick={ handleShareBtn }
           imageSrc={ shareIcon }
           altImage="icone para compatilhar"
         />
-        { copiedLink && <p>Link copiado!</p>}
+        { copiedLink && <p className="copiedLink">Link copiado!</p>}
       </div>
       <div>
-        <p data-testid={ `${index}-horizontal-done-date` }>{`Done date: ${doneDate}`}</p>
+        <div>
+          <Link to={ `/${type}s/${id}` }>
+            <h3 data-testid={ `${index}-horizontal-name` }>{ name }</h3>
+          </Link>
+          <h2
+            data-testid={ `${index}-horizontal-top-text` }
+          >
+            { type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
+          </h2>
+        </div>
+      </div>
+      <div>
+        <p
+          data-testid={ `${index}-horizontal-done-date` }
+          className={ type === 'comida' ? 'doneDateMeal' : 'doneDateDrink' }
+        >
+          {`Done date: ${doneDate}`}
+        </p>
         { tags.map((tag, i) => (
           i < 2
           && <p key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>{tag}</p>

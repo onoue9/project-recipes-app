@@ -21,7 +21,7 @@ export default function FavCard(props) {
   };
 
   return (
-    <div>
+    <div className="doneCard">
       <Link to={ `/${type}s/${id}` }>
         <img
           src={ image }
@@ -32,28 +32,34 @@ export default function FavCard(props) {
       </Link>
       <div>
         <div>
-          <h3
+          <Link to={ `/${type}s/${id}` }>
+            <h3 data-testid={ `${index}-horizontal-name` }>{ name }</h3>
+          </Link>
+          <h2
             data-testid={ `${index}-horizontal-top-text` }
           >
             { type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
-          </h3>
-          <Link to={ `/${type}s/${id}` }>
-            <h2 data-testid={ `${index}-horizontal-name` }>{ name }</h2>
-          </Link>
+          </h2>
         </div>
-        <ImageButton
-          testid={ `${index}-horizontal-share-btn` }
-          onClick={ handleShareBtn }
-          imageSrc={ shareIcon }
-          altImage="icone para compatilhar"
-        />
-        { copiedLink && <p>Link copiado!</p>}
-        <ImageButton
-          testid={ `${index}-horizontal-favorite-btn` }
-          onClick={ onClick }
-          imageSrc={ favIcon }
-          altImage="icone para favoritas"
-        />
+        <div className="interactionFavBtn">
+          <div className="shareFavBtn">
+            <ImageButton
+              testid={ `${index}-horizontal-share-btn` }
+              onClick={ handleShareBtn }
+              imageSrc={ shareIcon }
+              altImage="icone para compatilhar"
+            />
+            { copiedLink && <p className="copiedLink">Link copiado!</p>}
+          </div>
+          <div className="shareFavBtn">
+            <ImageButton
+              testid={ `${index}-horizontal-favorite-btn` }
+              onClick={ onClick }
+              imageSrc={ favIcon }
+              altImage="icone para favoritas"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
