@@ -13,10 +13,10 @@ export default function DrinksCart() {
               && (
                 <Link
                   to={ `/bebidas/${drink.idDrink}` }
+                  key={ drink.idDrink }
                 >
                   <div
                     data-testid={ `${index}-recipe-card` }
-                    key={ drink.idDrink }
                     className="recipeCard"
                   >
                     <img

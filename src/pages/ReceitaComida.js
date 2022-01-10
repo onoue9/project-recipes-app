@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import ReactPlayer from 'react-player';
 import shareIcon from '../images/shareIcon.svg';
 import unfavoriteIcon from '../images/whiteHeartIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
@@ -132,9 +133,15 @@ export default function ReceitaComida(props) {
           <h3>Instructions</h3>
           <p data-testid="instructions">{meal.strInstructions}</p>
         </div>
-        <div>
+        <div className="videoSection">
           <h3>Video</h3>
-          <iframe title={ meal.strMeal } data-testid="video" src={ meal.strYoutube } />
+          <ReactPlayer
+            controls
+            data-testid="video"
+            url={ meal.strYoutube }
+            width="320px"
+            height="250px"
+          />
         </div>
         <div>
           { recomendation.length > 0 && <Recomendacao

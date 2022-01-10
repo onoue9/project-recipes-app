@@ -22,11 +22,12 @@ Button.propTypes = {
   labelText: PropTypes.string.isRequired,
   testid: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  key: PropTypes.string.isRequired,
+  key: PropTypes.string,
   className: PropTypes.string,
 };
 
 Button.defaultProps = {
   disabled: true,
   className: '',
+  key: '',
 };

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function Button({ testid, onClick, imageSrc, altImage, className }) {
+export default function ImageButton({ testid, onClick, imageSrc, altImage, className }) {
   return (
     <button onClick={ onClick } className={ className } type="button">
       <img
@@ -13,10 +13,14 @@ export default function Button({ testid, onClick, imageSrc, altImage, className 
   );
 }
 
-Button.propTypes = {
+ImageButton.propTypes = {
   altImage: PropTypes.string.isRequired,
   testid: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   imageSrc: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
+ImageButton.defaultProps = {
+  className: '',
 };

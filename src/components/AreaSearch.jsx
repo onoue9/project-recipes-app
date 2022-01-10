@@ -29,7 +29,6 @@ export default function AreaSearch({ areaList }) {
 
   return (
     <div>
-      {console.log(areaSelected, recipesList)}
       <select
         onChange={ defineSelectedArea }
         data-testid="explore-by-area-dropdown"
@@ -57,10 +56,10 @@ export default function AreaSearch({ areaList }) {
               && (
                 <Link
                   to={ `/comidas/${meal.idMeal}` }
+                  key={ meal.idMeal }
                 >
                   <div
                     data-testid={ `${index}-recipe-card` }
-                    key={ meal.idMeal }
                     className="recipeCard"
                   >
                     <img

@@ -48,3 +48,21 @@ export function inProgressRecipesVerifier(id) {
     && ((inProgress.cocktails && inProgress.cocktails[id])
     || (inProgress.meals && inProgress.meals[id])));
 }
+
+const maxIndexCounter = 4;
+
+export function increaseCarousel(isVisible, setIsVisible) {
+  if (isVisible < maxIndexCounter) {
+    setIsVisible(isVisible + 2);
+  } else {
+    setIsVisible(0);
+  }
+}
+
+export function decreaseCarousel(isVisible, setIsVisible) {
+  if (isVisible > 1) {
+    setIsVisible(isVisible - 2);
+  } else {
+    setIsVisible(maxIndexCounter);
+  }
+}

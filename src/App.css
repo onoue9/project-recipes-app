@@ -301,6 +301,10 @@ button:disabled {
   width: 100%;
 }
 
+.videoSection {
+  margin-bottom: 20px;
+}
+
 /* -----Explore----- */
 .exploreSection {
   display: flex;
@@ -434,6 +438,15 @@ button:disabled {
   margin: 0;
 }
 
+.recomendedCart img {
+  width: 100%;
+}
+
+.doneCard img {
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+}
+
 .interactionBtn {
   display: flex;
   justify-content: space-evenly;
@@ -481,21 +494,29 @@ button:disabled {
 }
 
 .recomendedList {
-  display: flex;
-  flex-direction: row;
-  margin-left: -20px;
+  margin-left: auto;
+  margin-right: auto;
   overflow: hidden;
-  width: 360px;
+  text-align: center;
+  width: 320px;
+}
+
+.image-container {
+  position: relative;
+  width: 960px;
 }
 
 .recomendedCart {
-  width: 180px;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 160px;
 }
 
 .recomendedCart p {
   background-color: var(--laranja-claro);
   color: var(--azul);
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
   padding-left: 15px;
 }
@@ -503,35 +524,38 @@ button:disabled {
 .recomendedCart h3 {
   background-color: var(--laranja-claro);
   color: var(--azul);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0;
   padding-left: 15px;
 }
 
-.recomendedCart img {
-  width: 100%;
+.button-container {
+  text-align: center;
+}
+
+.button-container button {
+  background-color: var(--branco);
+  border: solid 0.5px var(--azul);
+  border-radius: 50%;
+  box-shadow: 2.5px 2.5px var(--azul);
+  height: 40px;
+  margin: 10px;
+  padding: 7px;
+  width: 40px;
+}
+
+.visible {
+  display: inline-block;
+}
+
+.invisible {
+  display: none;
 }
 
 .email {
   font-size: 1.2rem;
   font-weight: 400;
-}
-
-.index2 {
-  display: none;
-}
-
-.index3 {
-  display: none;
-}
-
-.index4 {
-  display: none;
-}
-
-.index5 {
-  display: none;
 }
 
 .checked {
@@ -583,11 +607,6 @@ button:disabled {
   box-shadow: 4px 4px var(--azul);
   margin-bottom: 20px;
   width: 80vw;
-}
-
-.doneCard img {
-  border-radius: 20px 20px 0 0;
-  width: 100%;
 }
 
 .doneCard h3 {

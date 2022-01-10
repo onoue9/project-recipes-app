@@ -3,14 +3,12 @@ import { useHistory } from 'react-router';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import logo from '../images/recipes.png';
-// import Context from '../context/Context';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
   const history = useHistory();
-  // const { fetchAPI } = useContext(Context);
 
   const verifyInput = () => {
     const emailValidation = /\S+@\S+.com/;
@@ -38,8 +36,6 @@ function Login() {
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     localStorage.setItem('user', JSON.stringify(objStorage));
-    // const filter = 'search.php?s=';
-    // fetchAPI(filter);
     history.push('/comidas');
   };
 
@@ -70,7 +66,6 @@ function Login() {
         labelText="Entrar"
         disabled={ btnIsDisabled }
         onClick={ handleClick }
-        key="loginBtn"
         className="loginBtn"
       />
     </div>

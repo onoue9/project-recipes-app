@@ -13,10 +13,10 @@ export default function MealsCart() {
               && (
                 <Link
                   to={ `/comidas/${meal.idMeal}` }
+                  key={ ` ${meal.strMeal} ${index}` }
                 >
                   <div
                     data-testid={ `${index}-recipe-card` }
-                    key={ meal.idMeal }
                     className="recipeCard"
                   >
                     <img

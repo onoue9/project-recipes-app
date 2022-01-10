@@ -32,7 +32,7 @@ export default function CategoryFilter() {
         && apiCategoryResult.map((category, index) => (
           index < listLimit && (
             <Button
-              key={ category.strCategory }
+              key={ `${category.strCategory}${index}` }
               testid={ `${category.strCategory}-category-filter` }
               labelText={ category.strCategory }
               onClick={ handleCategoryButton }
@@ -45,7 +45,6 @@ export default function CategoryFilter() {
         labelText="All"
         onClick={ handleButtonAll }
         testid="All-category-filter"
-        key="allBtn"
         disabled={ false }
         className="categoryBtn"
       />
