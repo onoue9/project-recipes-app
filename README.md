@@ -1,9 +1,11 @@
 # Project Recipes APP
 
 # Contexto
-Este projeto trata-se de um aplicativo de receitas para comidas e bebidas. Foi utilizada uma API específica de receitas e bebidas para as consultas.
-O intuito do projeto era testar nossas habilidades de front-end em React, Redux, consumir API.
-O projeto foi desenvolvido em grupo, onde optamos por utilizar a metodologia de pair-programming. 
+Este projeto trata-se de um aplicativo de receitas para comidas e bebidas. Foi utilizada uma API's específica de receitas e bebidas para as consultas.
+O intuito do projeto era testar nossas habilidades de front-end em React, Redux e consumir API's.
+O projeto foi desenvolvido em grupo, onde optamos por utilizar a metodologia de pair-programming.
+
+Grupo composto por: Filipe Onoue, Igor Marinho, Luiz Fernando e Lucas Toledo.
 
 ## Técnologias usadas
 
@@ -21,5 +23,5 @@ npm install
 * Para rodar o front-end:
 
   ```
-    cd npm start
+  npm start
   ```
